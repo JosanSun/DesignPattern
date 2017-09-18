@@ -5,5 +5,5 @@
 
 ## 参考资料
 
-1. (Design Patterns: Elements of Reusable Object-Oriented Software)[www.uml.org.cn/c++/pdf/DesignPatterns.pdf]
-2. (大话设计模式)[https://book.douban.com/subject/2334288/]
+1. [Design Patterns: Elements of Reusable Object-Oriented Software](www.uml.org.cn/c++/pdf/DesignPatterns.pdf)
+2. [大话设计模式](https://book.douban.com/subject/2334288/)
