@@ -32,11 +32,7 @@ public:
 	{
 		y = yy;
 	}
-	virtual double getResult() = 0;
-	virtual ~Oper()
-	{
-
-	}
+	virtual double getResult() = 0;//使oper可实例化
 private:
 	double x;
 	double y;
@@ -94,10 +90,19 @@ class OperFactory
 public:
 	static shared_ptr<Oper> createOper(char operChar)
 	{
+		//这边会报错
 		shared_ptr<Oper> oper;
 		switch(operChar)
-		{
+		{//这里原先用法不对，应将实例的类名放在模版中，结果显示正确
 		case '+':
+			////NOTE: make_shared<T>(args);   这个会实例化T(args)对象
+			//oper = make_shared<Oper>(OperatorAdd());  //此处会报错。
+			//what is make_shared ???
+			/*
+			 * template <class T, class... Args>
+			 * shared_ptr<T> make_shared (Args&&... args);Make shared_ptr
+			 * Allocates and constructs an object of type T passing args to its constructor, and returns an object of type shared_ptr<T> that owns and stores a pointer to it (with a use count of 1).
+			 */
 			oper = make_shared<OperatorAdd>();
 			break;
 		case '-':
@@ -132,4 +137,3 @@ int main()
 	testSimpleFactoryMode();
 	return 0;
 }
-
