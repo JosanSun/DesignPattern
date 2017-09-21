@@ -1,17 +1,18 @@
 /*
-* ---------------------------------------------------
-*  Copyright (c) 2017 josan All rights reserved.
-* ---------------------------------------------------
-*
-*               创建者： Josan
-*             创建时间： 2017/9/18 16:57:06
-*/
+ * ---------------------------------------------------
+ *  Copyright (c) 2017 josan All rights reserved.
+ * ---------------------------------------------------
+ *
+ *               创建者： Josan
+ *             创建时间： 2017/9/18 16:57:06
+ */
 #include <iostream>
 #include <string>
 #include <cmath>
 #include <stdexcept>
 #include <memory>
 using namespace std;
+
 
 class Oper
 {
@@ -32,11 +33,10 @@ public:
 	{
 		y = yy;
 	}
-	virtual double getResult() = 0;
-	virtual ~Oper()
+	virtual double getResult()
 	{
-
-	}
+		return 0.0;
+	};
 private:
 	double x;
 	double y;
@@ -89,25 +89,26 @@ public:
 	}
 };
 
+//简答工厂模式  生产出所有的运算符类 
 class OperFactory
 {
 public:
-	static shared_ptr<Oper> createOper(char operChar)
+	static Oper* createOper(char operChar)
 	{
-		shared_ptr<Oper> oper;
+		Oper* oper = nullptr;
 		switch(operChar)
 		{
 		case '+':
-			oper = make_shared<OperatorAdd>();
+			oper = new OperatorAdd();
 			break;
 		case '-':
-			oper = make_shared<OperatorSub>();
+			oper = new OperatorSub();
 			break;
 		case '*':
-			oper = make_shared<OperatorMul>();
+			oper = new OperatorMul();
 			break;
 		case '/':
-			oper = make_shared<OperatorDiv>();
+			oper = new OperatorDiv();
 			break;
 			//other operation
 		default:
@@ -119,7 +120,7 @@ public:
 
 void testSimpleFactoryMode()
 {
-	shared_ptr<Oper> oper(OperFactory::createOper('+'));
+	Oper* oper(OperFactory::createOper('+'));
 	oper->setNumberA(1);
 	oper->setNumberB(2);
 	double res = oper->getResult();
